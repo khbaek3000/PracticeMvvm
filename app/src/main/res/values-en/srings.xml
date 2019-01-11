@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PracticeMvvm</string>
+    <string name="menu_logout">logout</string>
+    <string name="menu_userinfo">user info</string>
+    <string name="menu_login">login</string>
+    <string name="menu_signup">sign up</string>
+    <string name="not_login">please login</string>
+</resources>

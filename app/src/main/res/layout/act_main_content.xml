@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="mainvm"
+            type="com.example.brianbaek.practicemvvm.main.MainVM"/>
+
+    </data>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/ctlMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/cdl_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                >
+            </android.support.v7.widget.RecyclerView>
+            <include
+                android:id="@+id/inc_appbar"
+                layout="@layout/appbarlayout_main"/>
+
+        </android.support.design.widget.CoordinatorLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>
