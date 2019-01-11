@@ -6,12 +6,22 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.support.design.widget.NavigationView;
+import android.util.Log;
 
 import com.example.brianbaek.practicemvvm.R;
+import com.example.brianbaek.practicemvvm.common.Action1;
 import com.example.brianbaek.practicemvvm.common.BaseViewModel;
 import com.example.brianbaek.practicemvvm.model.Product;
 
 import java.util.List;
+import java.util.function.Consumer;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainVM extends BaseViewModel {
     MutableLiveData<List<Product>> productLiveData = new MutableLiveData<>();
@@ -52,4 +62,71 @@ public class MainVM extends BaseViewModel {
     protected void onCleared() {
         super.onCleared();
     }
+
+
+    /**
+     *
+    RxJava Observable practice
+    *
+    * */
+
+    Observable<String> myObservable;
+
+    public void observableTest(){
+        myObservable = Observable
+                .create(subscriber -> {subscriber.onNext("kkk");
+                subscriber.onComplete();
+                });
+
+        myObservable.subscribe();
+    }
+
+    Observable<String> observable;
+
+    Consumer c = s->{System.out.println(s);};
+    public void observableTest2(){
+        observable = Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
+                emitter.onNext("kkk");
+            }
+        });
+
+        observable.subscribe(s->Log.d("Observable Test", s));
+    }
+    Action1<String> onNextAction = new Action1<String>() {
+        @Override
+        public void call(String s) {
+            System.out.println(s);
+        }
+    };
+
+    public Observable getStringObservable(String content){
+        return Observable.create(subscriber -> subscriber.onNext(content));
+
+    }
+
+    public Observable<Integer> getIntegerObservable(String content){
+        return testObservable(content)
+                .map(new Function<String , Integer>() {
+                    @Override
+                    public Integer apply(String s) throws Exception {
+                        try {
+                            return Integer.parseInt(s);
+                        } catch (Exception e){
+                            return 0;
+                        }
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable testObservable(String content){
+        return Observable.just(content);
+
+
+    }
+
+
 }

@@ -11,12 +11,12 @@
         android:id="@+id/abl_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorLightBlue"
+        android:background="@color/colorWhite"
         >
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/ctbar_main"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:src="@drawable/playmarketlogo"
-                android:scaleType="fitCenter"
+                android:scaleType="fitXY"
                 android:layout_marginTop="?attr/actionBarSize"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.5"/>
@@ -39,6 +39,7 @@
             android:id="@+id/tblMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorLightBlue"
             app:tabTextColor="@color/colorWhite"
             app:tabIndicatorColor="@color/colorAqua"
             app:tabMode="scrollable"

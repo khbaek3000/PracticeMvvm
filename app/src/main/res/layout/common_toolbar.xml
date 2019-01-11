@@ -10,7 +10,8 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentStart = "true"
         android:background="@color/colorLightBlue"
-        app:layout_collapseMode="pin">
+        app:layout_collapseMode="pin"
+        >
         <ImageView
             android:id="@+id/ivInToolbar"
             android:layout_width="wrap_content"
