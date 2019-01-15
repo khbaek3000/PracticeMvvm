@@ -6,4 +6,6 @@
     <string name="menu_login">login</string>
     <string name="menu_signup">sign up</string>
     <string name="not_login">please login</string>
+    <string name="product_name">productName</string>
+    <string name="product_company">companyName</string>
 </resources>

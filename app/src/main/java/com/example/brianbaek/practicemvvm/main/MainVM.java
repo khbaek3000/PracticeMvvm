@@ -2,15 +2,19 @@ package com.example.brianbaek.practicemvvm.main;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.BindingAdapter;
+import android.databinding.ObservableArrayList;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.support.design.widget.NavigationView;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.example.brianbaek.practicemvvm.R;
+import com.example.brianbaek.practicemvvm.apiservice.ApiService;
 import com.example.brianbaek.practicemvvm.common.Action1;
 import com.example.brianbaek.practicemvvm.common.BaseViewModel;
+import com.example.brianbaek.practicemvvm.common.Communication;
 import com.example.brianbaek.practicemvvm.model.Product;
 
 import java.util.List;
@@ -27,6 +31,7 @@ public class MainVM extends BaseViewModel {
     MutableLiveData<List<Product>> productLiveData = new MutableLiveData<>();
     ObservableBoolean isLogin = new ObservableBoolean();
     ObservableInt menuResId = new ObservableInt();
+    ObservableArrayList<Product> productList = new ObservableArrayList<>();
 
     @BindingAdapter("app:menu")
     public static void nvMenuSetting(NavigationView view, boolean login){
@@ -63,12 +68,15 @@ public class MainVM extends BaseViewModel {
         super.onCleared();
     }
 
+    public ObservableArrayList<Product> getProductList() {
+        return productList;
+    }
 
-    /**
+    /**********************************
      *
     RxJava Observable practice
     *
-    * */
+    ***********************************/
 
     Observable<String> myObservable;
 
@@ -128,5 +136,33 @@ public class MainVM extends BaseViewModel {
 
     }
 
+//    @BindingAdapter("bind:item")
+//    public void setRvAdapter(RecyclerView recyclerView, ObservableArrayList<Product> observableArrayList){
+//        MainListAdapter mainListAdapter = (MainListAdapter)recyclerView.getAdapter();
+//        if(mainListAdapter != null){
+//
+//        }
+//    }
 
+
+    public void setProductList(String query){
+       new Communication()
+               .getProductList(query)
+               .subscribe(productList-> {
+                   this.productList.addAll(productList);
+                   if(this.productList!=null){
+                       for(Product p : this.productList){
+                           Log.d("product list ", " name = "
+                                   + p.name + " company = " + p.company + " category = "
+                                   + p.category.name + " quantity = " + p.quantity);
+                       }
+                   }
+
+       });
+
+       //Log.d("product list", "이름 = " + productList.get(1).name + "회사명 = " + productList.get(1).company);
+
+
+
+    }
 }

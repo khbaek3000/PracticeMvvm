@@ -1,4 +1,7 @@
 package com.example.brianbaek.practicemvvm.data;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
+
 }

@@ -22,4 +22,31 @@ public class Product implements Serializable {
 
     @SerializedName("quantity")
     public int quantity;
+
+    public Category category;
+
+    public class Category{
+
+        @SerializedName("id")
+        public int id;
+
+        @SerializedName("name")
+        public String name;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
 }

@@ -10,8 +10,12 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.brianbaek.practicemvvm.R;
+import com.example.brianbaek.practicemvvm.apiservice.ApiService;
 import com.example.brianbaek.practicemvvm.databinding.ActMainBinding;
+import com.example.brianbaek.practicemvvm.model.Product;
+import com.google.gson.JsonArray;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 
 public class MainAct extends AppCompatActivity {
@@ -39,13 +43,15 @@ public class MainAct extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("카테고리4"));
         tabLayout.addTab(tabLayout.newTab().setText("카테고리5"));
 
-        viewModel.observableTest2();
-        //setNvMenu();
+//        viewModel.observableTest2();
+//        //setNvMenu();
+//
+//        getObservableTest(viewModel.getStringObservable("abcdef"));
+//
+//        viewModel.getIntegerObservable("123")
+//                .subscribe(content->{Log.d("observable test" , content.toString());});
 
-        getObservableTest(viewModel.getStringObservable("abcdef"));
-
-        viewModel.getIntegerObservable("123")
-                .subscribe(content->{Log.d("observable test" , content.toString());});
+        viewModel.setProductList(null);
     }
 
     public void setNvMenu(){
