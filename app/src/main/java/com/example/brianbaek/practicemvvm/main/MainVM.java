@@ -6,6 +6,7 @@ import android.databinding.ObservableArrayList;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
+import android.os.Build;
 import android.support.design.widget.NavigationView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -75,6 +76,10 @@ public class MainVM extends BaseViewModel {
     public ObservableArrayList<Product> getProductList() {
         return productList;
     }
+
+//    public void isEmulator(){
+//        Log.d("Is Emulator", Build.MANUFACTURER.toString());
+//    }
 
     /**********************************
      *
@@ -162,7 +167,7 @@ public class MainVM extends BaseViewModel {
                        }
                    }
 
-       });
+       }, throwable -> {Log.d("Network Exception" , throwable.toString());});
 
        //Log.d("product list", "이름 = " + productList.get(1).name + "회사명 = " + productList.get(1).company);
 
