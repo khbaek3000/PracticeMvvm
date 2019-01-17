@@ -15,21 +15,28 @@ import com.example.brianbaek.practicemvvm.databinding.ActMainBinding;
 import com.example.brianbaek.practicemvvm.model.Product;
 import com.google.gson.JsonArray;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 
 public class MainAct extends AppCompatActivity {
     private ActMainBinding actMainBinding;
-    private MainVM viewModel;
+    //private MainVM viewModel;
     private ObservableArrayList observableArrayList;
     TabLayout tabLayout;
 
+    @Inject
+    MainVM viewModel;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
 
         actMainBinding = DataBindingUtil.setContentView(this, R.layout.act_main);
-        viewModel = new MainVM();
+//        viewModel = new MainVM();
         actMainBinding.setMainvm(viewModel);
 
         viewModel.setIsLogin(true);

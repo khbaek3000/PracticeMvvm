@@ -33,6 +33,10 @@ public class MainVM extends BaseViewModel {
     ObservableInt menuResId = new ObservableInt();
     ObservableArrayList<Product> productList = new ObservableArrayList<>();
 
+    public MainVM() {
+
+    }
+
     @BindingAdapter("app:menu")
     public static void nvMenuSetting(NavigationView view, boolean login){
         if(login){
@@ -79,6 +83,8 @@ public class MainVM extends BaseViewModel {
     ***********************************/
 
     Observable<String> myObservable;
+    Observable<String> observable;
+
 
     public void observableTest(){
         myObservable = Observable
@@ -88,8 +94,6 @@ public class MainVM extends BaseViewModel {
 
         myObservable.subscribe();
     }
-
-    Observable<String> observable;
 
     Consumer c = s->{System.out.println(s);};
     public void observableTest2(){
@@ -161,8 +165,6 @@ public class MainVM extends BaseViewModel {
        });
 
        //Log.d("product list", "이름 = " + productList.get(1).name + "회사명 = " + productList.get(1).company);
-
-
 
     }
 }
