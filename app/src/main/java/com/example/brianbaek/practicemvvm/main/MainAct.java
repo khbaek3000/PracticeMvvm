@@ -58,6 +58,7 @@ public class MainAct extends AppCompatActivity {
 //                .subscribe(content->{Log.d("observable test" , content.toString());});
         viewModel.setProductList(null);
         //viewModel.isEmulator();
+
     }
 
     public void setNvMenu(){
@@ -70,6 +71,5 @@ public class MainAct extends AppCompatActivity {
                 , Toast.LENGTH_SHORT).show();
         });
     }
-
 
 }

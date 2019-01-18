@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.example.brianbaek.practicemvvm.BaseApplication;
 import com.example.brianbaek.practicemvvm.di.ApplicationModule;
+import com.example.brianbaek.practicemvvm.di.StorageModule;
 import com.example.brianbaek.practicemvvm.di.subcomponent.ActivityBindingModule;
 
 import javax.inject.Singleton;
@@ -19,7 +20,8 @@ import dagger.android.support.AndroidSupportInjectionModule;
         //AndroidInjectionModule.class,
         AndroidSupportInjectionModule.class,
         ActivityBindingModule.class,
-        ApplicationModule.class
+        ApplicationModule.class,
+        StorageModule.class
         })
 public interface AppComponent extends AndroidInjector<BaseApplication> {
 

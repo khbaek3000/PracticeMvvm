@@ -9,19 +9,24 @@ import com.example.brianbaek.practicemvvm.database.entity.User;
 
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+
 @Dao
 public interface UserDao {
     @Insert
-    Void InsertUser(User... users);
+    void InsertUser(User... users);
 
-    @Query("SELECT * From user Where uid = (:uid)")
-    User getUserById(int uid);
+    @Query("SELECT * From User Where uid = (:uid)")
+    Single<User> getUserById(int uid);
 
-    @Query("SELECT * FROM user")
-    List<User> getAllUser();
+    @Query("SELECT * FROM User")
+    Single<List<User>> getAllUser();
 
-    @Query("SELECT * FROM user WHERE uname (:userNames)")
-    List<User> getAllUserByName(String[] userNames);
+    @Query("SELECT * FROM User WHERE uname = (:userNames)")
+    Single<List<User>> getAllUserByName(String[] userNames);
 
     @Delete
     void deleteUser(User user);

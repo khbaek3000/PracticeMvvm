@@ -8,4 +8,9 @@
     <string name="not_login">please login</string>
     <string name="product_name">productName</string>
     <string name="product_company">companyName</string>
+    <string name="user_name">name</string>
+    <string name="user_age">age</string>
+    <string name="user_region">region</string>
+    <string name="insert">insert</string>
+    <string name="select">select</string>
 </resources>
