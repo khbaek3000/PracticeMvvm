@@ -4,8 +4,10 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity
-public class User {
+public class User implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int uid;
@@ -19,7 +21,16 @@ public class User {
     @ColumnInfo(name = "region")
     private String region;
 
+    public User(){
 
+    }
+
+    public User(int uid, String name, int age, String region) {
+        this.uid = uid;
+        this.name = name;
+        this.age = age;
+        this.region = region;
+    }
 
     public int getUid() {
         return uid;

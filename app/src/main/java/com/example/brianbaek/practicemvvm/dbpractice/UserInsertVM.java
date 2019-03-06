@@ -39,16 +39,17 @@ public class UserInsertVM extends BaseViewModel {
         user.setAge(age);
         user.setRegion(region);
 
-        Completable.complete().subscribeOn(Schedulers.io()).subscribe(()->userDao.InsertUser(user));
+        //Completable.complete().subscribeOn(Schedulers.io()).subscribe(()->userDao.InsertUser(user));
+        Completable.create(e -> {userDao.InsertUser(user); e.onComplete();}).subscribeOn(Schedulers.io()).subscribe(()->getDB());
 
-        userDao.getAllUser().subscribeOn(Schedulers.io())
-                .subscribe(
-
-                        userList->{
-                            for(User u : userList){
-                                Log.d("user data => ", u.toString());
-                            }
-                        });
+//        userDao.getAllUser().subscribeOn(Schedulers.io())
+//                .subscribe(
+//
+//                        userList->{
+//                            for(User u : userList){
+//                                Log.d("user data => ", u.toString());
+//                            }
+//                        });
 
 
 //        new Thread(new Runnable() {
@@ -69,5 +70,15 @@ public class UserInsertVM extends BaseViewModel {
 
     }
 
+    public void getDB(){
+        userDao.getAllUser().subscribeOn(Schedulers.io())
+                .subscribe(
+
+                        userList->{
+                            for(User u : userList){
+                                Log.d("user data => ", u.toString());
+                            }
+                        });
+    }
 
 }

@@ -20,7 +20,13 @@
                 android:id="@+id/rv_main"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:data="@{mainvm.observableProductList}"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:fastScrollEnabled="true"
+                app:fastScrollHorizontalThumbDrawable="@drawable/thumb_drawable"
+                app:fastScrollHorizontalTrackDrawable="@drawable/line_drawable"
+                app:fastScrollVerticalThumbDrawable="@drawable/thumb_drawable"
+                app:fastScrollVerticalTrackDrawable="@drawable/line_drawable"
                 >
             </android.support.v7.widget.RecyclerView>
             <include

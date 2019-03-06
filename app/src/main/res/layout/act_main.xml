@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
 
     <data>
         <variable
@@ -29,7 +31,9 @@
                 android:id="@+id/inc_main_content"
                 layout="@layout/act_main_content"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                bind:mainvm = "@{mainvm}"
+                />
             <android.support.design.widget.NavigationView
                 android:id="@+id/nv_main"
                 android:layout_width="wrap_content"

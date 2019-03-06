@@ -3,10 +3,14 @@ package com.example.brianbaek.practicemvvm.main;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.brianbaek.practicemvvm.R;
@@ -30,6 +34,9 @@ public class MainAct extends AppCompatActivity {
     @Inject
     MainVM viewModel;
 
+    @Inject
+    MainListAdapter mainListAdapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         AndroidInjection.inject(this);
@@ -39,8 +46,15 @@ public class MainAct extends AppCompatActivity {
 //        viewModel = new MainVM();
         actMainBinding.setMainvm(viewModel);
 
+        viewModel.init();
         viewModel.setIsLogin(true);
         viewModel.setMenuResId(viewModel.getIsLogin().get());
+        actMainBinding.nvMain.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                return false;
+            }
+        });
 
         tabLayout = actMainBinding.incMainContent.incAppbar.tblMain;
         tabLayout.addTab(tabLayout.newTab().setText("카테고리1"));
@@ -58,7 +72,8 @@ public class MainAct extends AppCompatActivity {
 //                .subscribe(content->{Log.d("observable test" , content.toString());});
         viewModel.setProductList(null);
         //viewModel.isEmulator();
-
+        actMainBinding.incMainContent.rvMain.setLayoutManager(new LinearLayoutManager(this));
+        actMainBinding.incMainContent.rvMain.setAdapter(mainListAdapter);
     }
 
     public void setNvMenu(){

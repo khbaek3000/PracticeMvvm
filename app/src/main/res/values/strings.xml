@@ -12,4 +12,6 @@
     <string name="user_region">지역</string>
     <string name="insert">입력</string>
     <string name="select">select</string>
+    <string name="goto_playshop">플레이샵으로</string>
+
 </resources>

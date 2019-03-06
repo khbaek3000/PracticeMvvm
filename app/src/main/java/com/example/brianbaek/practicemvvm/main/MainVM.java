@@ -16,11 +16,15 @@ import com.example.brianbaek.practicemvvm.apiservice.ApiService;
 import com.example.brianbaek.practicemvvm.common.Action1;
 import com.example.brianbaek.practicemvvm.common.BaseViewModel;
 import com.example.brianbaek.practicemvvm.common.Communication;
+import com.example.brianbaek.practicemvvm.database.dao.UserDao;
+import com.example.brianbaek.practicemvvm.database.entity.User;
 import com.example.brianbaek.practicemvvm.model.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -32,10 +36,45 @@ public class MainVM extends BaseViewModel {
     MutableLiveData<List<Product>> productLiveData = new MutableLiveData<>();
     ObservableBoolean isLogin = new ObservableBoolean();
     ObservableInt menuResId = new ObservableInt();
+    ObservableBoolean isLoadFinish = new ObservableBoolean();
     ObservableArrayList<Product> productList = new ObservableArrayList<>();
+    private ObservableField<List<User>> observableProductList = new ObservableField<>(new ArrayList<>());
+    List<User> userList = new ArrayList<>();
+    UserDao userDao;
 
-    public MainVM() {
+    public MainVM(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
+    public void init(){
+        setObservableProductList();
+    }
+
+
+
+    public ObservableField<List<User>> getObservableProductList() {
+        return observableProductList;
+    }
+
+    public void setObservableProductList() {
+        userDao.getAllUser()
+                .subscribeOn(Schedulers.io())
+                .subscribe(list-> {
+                    userList.addAll(list);
+                    observableProductList.set(list);
+
+                    isLoadFinish.set(true);
+                    for(User user: observableProductList.get()){
+                        Log.d("userdata", user.toString());
+            }
+                });
+//        List<User> list = new ArrayList();
+//        userList.add(new User(123, "user1", 11, "한국"));
+//        userList.add(new User(123, "user2", 21, "한국"));
+//        userList.add(new User(123, "user3", 31, "한국"));
+//        userList.add(new User(123, "user4", 41, "한국"));
+//        userList.add(new User(123, "user5", 51, "한국"));
+//        observableProductList.set(list);
     }
 
     @BindingAdapter("app:menu")
@@ -145,13 +184,13 @@ public class MainVM extends BaseViewModel {
 
     }
 
-//    @BindingAdapter("bind:item")
-//    public void setRvAdapter(RecyclerView recyclerView, ObservableArrayList<Product> observableArrayList){
-//        MainListAdapter mainListAdapter = (MainListAdapter)recyclerView.getAdapter();
-//        if(mainListAdapter != null){
-//
-//        }
-//    }
+    //@BindingAdapter("item")
+    public void setRvAdapter(RecyclerView recyclerView, ObservableArrayList<Product> observableArrayList){
+        MainListAdapter mainListAdapter = (MainListAdapter)recyclerView.getAdapter();
+        if(mainListAdapter != null){
+
+        }
+    }
 
 
     public void setProductList(String query){
@@ -171,5 +210,13 @@ public class MainVM extends BaseViewModel {
 
        //Log.d("product list", "이름 = " + productList.get(1).name + "회사명 = " + productList.get(1).company);
 
+    }
+
+    public ObservableBoolean getIsLoadFinish() {
+        return isLoadFinish;
+    }
+
+    public void setIsLoadFinish(ObservableBoolean isLoadFinish) {
+        this.isLoadFinish = isLoadFinish;
     }
 }

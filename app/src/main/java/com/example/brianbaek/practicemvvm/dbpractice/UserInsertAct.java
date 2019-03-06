@@ -1,5 +1,6 @@
 package com.example.brianbaek.practicemvvm.dbpractice;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.brianbaek.practicemvvm.R;
 import com.example.brianbaek.practicemvvm.databinding.DbInsertActBinding;
+import com.example.brianbaek.practicemvvm.main.MainAct;
 
 import javax.inject.Inject;
 
@@ -45,6 +47,11 @@ public class UserInsertAct extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void onGoPlayshopClick(View view){
+        Intent intentGoPlayshop = new Intent(this, MainAct.class);
+        startActivity(intentGoPlayshop);
     }
 
 
